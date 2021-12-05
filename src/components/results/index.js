@@ -1,3 +1,4 @@
+import './results.scss';
 
 export default function Results(myProps) {
   return (
