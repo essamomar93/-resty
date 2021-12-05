@@ -1,1 +1,1 @@
-# -resty
+# resty
