@@ -5,7 +5,19 @@ form {
   display: inline-block;
   margin: auto;
   width: 200px;
+.go{
+  display: flex;
+}
+.methods{
+  display: flex;
+  margin : 5%;
+  padding-left:10%;
 
+}
+.text{
+  position: relative;
+  left: 22%;
+}
   label {
     display: flex;
     margin: 1rem 0;
