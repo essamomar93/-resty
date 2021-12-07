@@ -5,13 +5,18 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
     "node-sass": "^6.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-json-pretty": "^2.2.0",
+    "react-json-view": "^1.21.3",
     "react-jsonschema-form": "1.8.1",
     "react-router-dom": "5.2.0",
-    "react-scripts": "4.0.3",
-    "sass": "^1.44.0"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,15 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/essamomar93/resty.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/essamomar93/resty/issues"
-  },
-  "homepage": "https://github.com/essamomar93/resty#readme"
+  }
 }

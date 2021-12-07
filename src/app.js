@@ -7,6 +7,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Form from "./components/form";
 import Results from "./components/results";
+import axios from "axios"
 
 class App extends React.Component {
   constructor(props) {
@@ -17,16 +18,15 @@ class App extends React.Component {
     };
   }
 
-  callApi = (requestParams) => {
-    // mock output
-    const data = {
-      count: 2,
-      results: [
-        { name: "fake thing 1", url: "http://fakethings.com/1" },
-        { name: "fake thing 2", url: "http://fakethings.com/2" }
-      ]
-    };
-    this.setState({ data, requestParams });
+  callApi = async (requestParams, requestBody) => {
+    if (requestParams.method === "GET" ){
+      let data = await axios.get(requestParams.url)
+      this.setState({ data: data.data, requestParams });
+    }else {
+      this.setState({
+        data:  { message: 'lodaing' }
+      })
+    }
   };
 
   render() {
