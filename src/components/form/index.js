@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 
 import "./form.scss";
 export default function Form(myProps) {
   const [methods, setMethods] = useState(0);
   const [Url, setUrl] = useState(0);
-  const [showTextArea, setShowArea] = useState(false);
+  const [showTextArea, setShowArea] = useState("");
   let [requestBody, setrequestBody] = useState("");
 
   const handelPost = (e) => {
@@ -32,8 +32,13 @@ export default function Form(myProps) {
       url: Url
     };
 
-    myProps.handleApiCall(getData);
+    myProps.handleApiCall(getData,requestBody);
   };
+
+  useEffect(() => {
+    console.log('The name has been changed!');
+  }, [requestBody]);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -56,6 +61,7 @@ export default function Form(myProps) {
             DELETE
           </button>
         </div>
+        
         <input className="text" name="url" type="text" onChange={getPost} />
       </form>
     </>

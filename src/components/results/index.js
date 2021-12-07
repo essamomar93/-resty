@@ -1,11 +1,25 @@
-import "./results.scss";
+import ReactJson from 'react-json-view';
+import './results.scss';
 
 export default function Results(myProps) {
   return (
-    <section>
-      <pre>
-        {myProps.data ? JSON.stringify(myProps.data, undefined, 2) : null}
-      </pre>
+    <section >
+      <ReactJson
+        name="Headers"
+        iconStyle={'triangle'}
+        collapsed={false}
+        enableClipboard={false}
+        displayDataTypes={false}
+      />
+      <ReactJson
+        src={myProps.data}
+        name="Response"
+        iconStyle={'triangle'}
+        collapsed={false}
+        enableClipboard={false}
+        displayDataTypes={false}
+      />
     </section>
   );
 }
+
