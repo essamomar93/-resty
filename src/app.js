@@ -1,48 +1,61 @@
-import React from "react";
 import "./app.scss";
-
-// Let's talk about using index.js and some other name in the component folder
-// There's pros and cons for each way of doing this ...
+import React, { useState, useReducer } from "react";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Form from "./components/form";
 import Results from "./components/results";
 import axios from "axios"
+import History from "./components/history/history"
+let initialhistory = [];
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {}
-    };
-  }
+function historyReducer(history = initialhistory, action) {
+  let { type, payload } = action
+  switch (type) {
+    case 'history':
+      history = [...history, payload]
+      return history;
+    default:
+      return history;
+  };
+};
+function addToHistory(url, method, results) {
+  return { type: 'history', payload: { url, method, results } }
+};
 
-  callApi = async (requestParams, requestBody) => {
-    if (requestParams.method === "GET" ){
+function App() {
+  let [data, setData] = useState(null);
+  let [requestParams, setrequestParams] = useState({});
+  let [history, addHistory] = useReducer(historyReducer, initialhistory)
+
+  const callApi = async (requestParams, requestBody) => {
+    setrequestParams(requestParams)
+    setData(null);
+    if (requestParams.method === "GET") {
       let data = await axios.get(requestParams.url)
-      this.setState({ data: data.data, requestParams });
-    }else {
-      this.setState({
-        data:  { message: 'lodaing' }
+      setData({ data: data.data });
+    } else {
+      setData({
+        data: { message: 'lodaing' }
       })
     }
+    addHistory(addToHistory(requestParams.url, requestParams.method, data))
   };
 
-  render() {
-    return (
-      <React.Fragment>
-        <Header />
-        <div className="requst">
-          Request Method: {this.state.requestParams.method}
-        </div>
-        <div className="url">URL: {this.state.requestParams.url}</div>
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
-        <Footer />
-      </React.Fragment>
-    );
-  }
+
+  return (
+    <React.Fragment>
+      <Header />
+      <div className="requst">
+        Request Method: {requestParams.method}
+      </div>
+      <div className="url">URL: {requestParams.url}</div>
+      <Form handleApiCall={callApi} />
+      <Results data={data} />
+       <History history={history}  />  
+      <Footer />
+    </React.Fragment>
+  );
+
 }
 
 export default App;
