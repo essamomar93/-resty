@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import "./form.scss";
 export default function Form(myProps) {
@@ -31,8 +31,7 @@ export default function Form(myProps) {
       method: methods,
       url: Url
     };
-
-    myProps.handleApiCall(getData,requestBody);
+    myProps.handleApiCall(getData, requestBody);
   };
 
   useEffect(() => {
@@ -61,7 +60,7 @@ export default function Form(myProps) {
             DELETE
           </button>
         </div>
-        
+
         <input className="text" name="url" type="text" onChange={getPost} />
       </form>
     </>
